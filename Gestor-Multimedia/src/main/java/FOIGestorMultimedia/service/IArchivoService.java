@@ -11,7 +11,7 @@ public interface IArchivoService {
 	
 	public Archivo guardarArchivo(Archivo archivo);	//Crear un Archivo
 	
-	public Archivo asignadoXArchivo(int id); //Leer todos los datos de Archivo
+	public Archivo archivoXID(int id); //Leer todos los datos de Archivo
 	
 	public Archivo actualizarArchivo(Archivo archivo); //Actualizar datos de Archivo
 	
