@@ -16,6 +16,7 @@ public class Archivo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private int id;
 	@NonNull
 	private String nombre;
@@ -29,12 +30,12 @@ public class Archivo {
 	private String descripcion;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_supercategoria")
-	private Categoria categoria;
+	@JoinColumn(name = "id_categoria")
+	Categoria categoria;
 
 	@ManyToOne
 	@JoinColumn(name = "nombre_usuario")
-	private String usuario;
+	Usuario usuario;
 	
 	/**
 	 * 
@@ -54,7 +55,7 @@ public class Archivo {
 	 * @param usuario
 	 */
 	public Archivo(int id, String nombre, String tamanyo, String path_publico, String tipo, String detalle,
-			String descripcion, Categoria categoria, String usuario) {
+			String descripcion, Categoria categoria, Usuario usuario) {
 		this.id = id;
 		this.nombre = nombre;
 		this.tamanyo = tamanyo;
@@ -171,13 +172,13 @@ public class Archivo {
 	/**
 	 * @return the usuario
 	 */
-	public String getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 	/**
 	 * @param usuario the usuario to set
 	 */
-	public void setUsuario(String usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 	
