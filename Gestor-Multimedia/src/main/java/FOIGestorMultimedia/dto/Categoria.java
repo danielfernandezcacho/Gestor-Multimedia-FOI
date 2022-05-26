@@ -1,20 +1,67 @@
 package FOIGestorMultimedia.dto;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.springframework.lang.NonNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
+@Table(name="categoria")
 public class Categoria {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@NonNull
 	private String nombre;
 	private String descripcion;
-	private String id_supercategoria;
-	private String nombre_usuario;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_supercategoria")
+	private Categoria categoria;
+
+	@ManyToOne
+	@JoinColumn(name = "nombre_usuario")
+	private String usuario;
+	
+	@OneToMany
+	@JoinColumn(name = "id_categoria")
+	private List<Archivo> archivo;
+	
+	
+	
+	/**
+	 * 
+	 */
+	public Categoria() {
+		
+	}
+	/**
+	 * @param id
+	 * @param nombre
+	 * @param descripcion
+	 * @param categoria
+	 * @param usuario
+	 */
+	public Categoria(int id, String nombre, String descripcion, Categoria categoria, String usuario) {
+		this.id = id;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.categoria = categoria;
+		this.usuario = usuario;
+	}
 	/**
 	 * @return the id
 	 */
@@ -52,34 +99,48 @@ public class Categoria {
 		this.descripcion = descripcion;
 	}
 	/**
-	 * @return the id_supercategoria
-	 */
-	public String getId_supercategoria() {
-		return id_supercategoria;
-	}
-	/**
-	 * @param id_supercategoria the id_supercategoria to set
-	 */
-	public void setId_supercategoria(String id_supercategoria) {
-		this.id_supercategoria = id_supercategoria;
-	}
-	/**
 	 * @return the nombre_usuario
 	 */
-	public String getNombre_usuario() {
-		return nombre_usuario;
+	
+	/**
+	 * @return the categoria
+	 */
+	public Categoria getCategoria() {
+		return categoria;
 	}
 	/**
-	 * @param nombre_usuario the nombre_usuario to set
+	 * @return the usuario
 	 */
-	public void setNombre_usuario(String nombre_usuario) {
-		this.nombre_usuario = nombre_usuario;
+	public String getUsuario() {
+		return usuario;
 	}
-	@Override
-	public String toString() {
-		return "Caegoria [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", id_supercategoria="
-				+ id_supercategoria + ", nombre_usuario=" + nombre_usuario + "]";
+	/**
+	 * @param usuario the usuario to set
+	 */
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
+	/**
+	 * @param categoria the categoria to set
+	 */
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+	/**
+	 * @return the archivo
+	 */
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Archivo")
+	public List<Archivo> getArchivo() {
+		return archivo;
+	}
+	/**
+	 * @param archivo the archivo to set
+	 */
+	public void setArchivo(List<Archivo> archivo) {
+		this.archivo = archivo;
+	}
+	
 
 	
 	
