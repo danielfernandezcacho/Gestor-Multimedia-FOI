@@ -12,31 +12,31 @@ import FOIGestorMultimedia.dto.Usuario;
 public class UsuarioServiceImpl implements IUsuarioService{
 	
 	@Autowired
-	IUsuarioDAO iProyectoDAO;
+	IUsuarioDAO iUsuarioDAO;
 
 	@Override
 	public List<Usuario> listarUsuario() {
-		return IUsuarioDAO.findAll();
+		return iUsuarioDAO.findAll();
 	}
 
 	@Override
 	public Usuario guardarUsuario(Usuario usuario) {
-		return IUsuarioDAO.save(usuario);
+		return iUsuarioDAO.save(usuario);
 	}
 
 	@Override
 	public Usuario usuarioXNombre(String nombre) {
-		return IUsuarioDAO.findById(nombre).get();
+		return iUsuarioDAO.findById(nombre).get();
 	}
 
 	@Override
 	public Usuario actualizarUsuario(Usuario usuario) {
-		return IUsuarioDAO.save(usuario);
+		return iUsuarioDAO.save(usuario);
 	}
 
 	@Override
 	public void eliminarUsuario(String nombre) {
-		IUsuarioDAO.deleteById(nombre);
+		iUsuarioDAO.deleteById(nombre);
 	}
 	
 }

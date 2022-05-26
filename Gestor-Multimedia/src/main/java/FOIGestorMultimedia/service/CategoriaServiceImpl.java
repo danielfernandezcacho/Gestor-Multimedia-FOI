@@ -5,38 +5,38 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import FOIGestorMultimedia.dao.IUsuarioDAO;
-import FOIGestorMultimedia.dto.Usuario;
+import FOIGestorMultimedia.dao.ICategoriaDAO;
+import FOIGestorMultimedia.dto.Categoria;
 
 @Service
-public class CategoriaServiceImpl implements IUsuarioService{
+public class CategoriaServiceImpl implements ICategoriaService{
 	
 	@Autowired
-	IUsuarioDAO iProyectoDAO;
+	ICategoriaDAO iCategoriaDAO;
 
 	@Override
-	public List<Usuario> listarUsuario() {
-		return iProyectoDAO.findAll();
+	public List<Categoria> listarCategoria() {
+		return iCategoriaDAO.findAll();
 	}
 
 	@Override
-	public Usuario guardarUsuario(Usuario usuario) {
-		return iProyectoDAO.save(usuario);
+	public Categoria guardarCategoria(Categoria categoria) {
+		return iCategoriaDAO.save(categoria);
 	}
 
 	@Override
-	public Usuario usuarioXNombre(String nombre) {
-		return iProyectoDAO.findById(nombre).get();
+	public Categoria categoriaXID(int id) {
+		return iCategoriaDAO.findById(id).get();
 	}
 
 	@Override
-	public Usuario actualizarUsuario(Usuario usuario) {
-		return iProyectoDAO.save(usuario);
+	public Categoria actualizarCategoria(Categoria categoria) {
+		return iCategoriaDAO.save(categoria);
 	}
 
 	@Override
-	public void eliminarUsuario(String nombre) {
-		iProyectoDAO.deleteById(nombre);
+	public void eliminarCategoria(int id) {
+		iCategoriaDAO.deleteById(id);
 	}
 	
 }
