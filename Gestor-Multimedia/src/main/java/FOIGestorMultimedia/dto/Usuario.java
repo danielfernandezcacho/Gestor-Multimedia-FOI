@@ -12,7 +12,7 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String nombre;
 	private String contrasenya;
-	private String superusuario;
+	private boolean superusuario;
 	/**
 	 * @return the nombre
 	 */
@@ -40,13 +40,13 @@ public class Usuario {
 	/**
 	 * @return the superusuario
 	 */
-	public String getSuperusuario() {
+	public boolean getSuperusuario() {
 		return superusuario;
 	}
 	/**
 	 * @param superusuario the superusuario to set
 	 */
-	public void setSuperusuario(String superusuario) {
+	public void setSuperusuario(boolean superusuario) {
 		this.superusuario = superusuario;
 	}
 	@Override
