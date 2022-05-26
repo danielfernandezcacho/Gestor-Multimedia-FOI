@@ -11,7 +11,7 @@ public interface ICategoriaService {
 	
 	public Categoria guardarCategoria(Categoria categoria);	//Crear un Categoria
 	
-	public Categoria asignadoXID(int id); //Leer todos los datos de Categoria
+	public Categoria categoriaXID(int id); //Leer todos los datos de Categoria
 	
 	public Categoria actualizarCategoria(Categoria categoria); //Actualizar datos de Categoria
 	
