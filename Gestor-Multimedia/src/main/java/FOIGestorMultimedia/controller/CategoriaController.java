@@ -14,54 +14,54 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import FOIGestorMultimedia.dto.Categoria;
+import FOIGestorMultimedia.service.CategoriaServiceImpl;
 
 @RestController
 @RequestMapping("/categoria")
 public class CategoriaController {
 
 	@Autowired
-	CategoriaServiceImpl asignadoServiceImpl;
+	CategoriaServiceImpl categoriaServiceImpl;
 
 	@GetMapping("/")
-	public List<Categoria> listarAsignados() {
-		return CategoriaServiceImpl.listarAsignado();
+	public List<Categoria> listarCategoria() {
+		return categoriaServiceImpl.listarCategoria();
 	}
 
 	@PostMapping("/")
-	public Categoria salvarAsignado(@RequestBody Categoria Asignado) {
+	public Categoria salvarCategoria(@RequestBody Categoria categoria) {
 
-		return CategoriaServiceImpl.guardarAsignado(Categoria);
+		return categoriaServiceImpl.guardarCategoria(categoria);
 	}
 
 	@GetMapping("/{id}")
-	public Categoria asignadoXID(@PathVariable(name = "id") int id) {
+	public Categoria CategoriaXID(@PathVariable(name = "id") int id) {
 
-		Categoria asignado_xid = new Categoria();
+		Categoria categoria_xid = new Categoria();
 
-		asignado_xid = categoriaServiceImpl.asignadoXID(id);
+		categoria_xid = categoriaServiceImpl.categoriaXID(id);
 
-		return asignado_xid;
+		return categoria_xid ;
 	}
 
 	@PutMapping("/{id}")
-	public Categoria actualizarAsignado(@PathVariable(name = "id") int id, @RequestBody Categoria categoria) {
+	public Categoria actualizarCategoria(@PathVariable(name = "id") int id, @RequestBody Categoria categoria) {
 
-		Categoria asignado_seleccionado = new Categoria();
-		Categoria asignado_actualizado = new Categoria();
+		Categoria Categoria_seleccionado = new Categoria();
+		Categoria Categoria_actualizado = new Categoria();
 
-		asignado_seleccionado = categoriaServiceImpl.asignadoXID(id);
+		Categoria_seleccionado = categoriaServiceImpl.categoriaXID(id);
 
-		asignado_seleccionado.setCientifico(asignado.getCientifico());
-		asignado_seleccionado.setProyecto(asignado.getcategoria());
+		Categoria_seleccionado.setId(categoria.getId());
 
-		asignado_actualizado = categoriaServiceImpl.actualizarAsignado(asignado_seleccionado);
+		Categoria_actualizado = categoriaServiceImpl.actualizarCategoria(Categoria_seleccionado);
 
-		return asignado_actualizado;
+		return Categoria_actualizado;
 	}
 
 	@DeleteMapping("/{id}")
 	public void eliminarAsignado(@PathVariable(name = "id") int id) {
-		categoriaServiceImpl.eliminarAsignado(id);
+		categoriaServiceImpl.eliminarCategoria(id);
 	}
 
 }
