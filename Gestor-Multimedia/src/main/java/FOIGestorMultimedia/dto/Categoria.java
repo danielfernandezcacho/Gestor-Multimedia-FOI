@@ -30,11 +30,11 @@ public class Categoria {
 	
 	@ManyToOne
 	@JoinColumn(name = "id_supercategoria")
-	private Categoria categoria;
+	 Categoria categoria;
 
 	@ManyToOne
 	@JoinColumn(name = "nombre_usuario")
-	private String usuario;
+	Usuario usuario;
 	
 	@OneToMany
 	@JoinColumn(name = "id_categoria")
@@ -55,7 +55,7 @@ public class Categoria {
 	 * @param categoria
 	 * @param usuario
 	 */
-	public Categoria(int id, String nombre, String descripcion, Categoria categoria, String usuario) {
+	public Categoria(int id, String nombre, String descripcion, Categoria categoria, Usuario usuario) {
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -111,13 +111,13 @@ public class Categoria {
 	/**
 	 * @return the usuario
 	 */
-	public String getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 	/**
 	 * @param usuario the usuario to set
 	 */
-	public void setUsuario(String usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 	/**

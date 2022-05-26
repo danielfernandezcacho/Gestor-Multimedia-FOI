@@ -24,6 +24,7 @@ public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "nombre")
 	private String nombre;
 	@NonNull
 	private String contrasenya;
