@@ -62,7 +62,7 @@ public class CategoriaController {
 	}
 
 	@DeleteMapping("/{id}")
-	public void eliminarAsignado(@PathVariable(name = "id") int id) {
+	public void eliminarCategoria(@PathVariable(name = "id") int id) {
 		categoriaServiceImpl.eliminarCategoria(id);
 	}
 
