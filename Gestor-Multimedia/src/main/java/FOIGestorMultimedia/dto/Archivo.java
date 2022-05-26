@@ -4,21 +4,67 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.springframework.lang.NonNull;
 
 @Entity
+@Table(name="archivo")
 public class Archivo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@NonNull
 	private String nombre;
+	@NonNull
 	private String tamanyo;
+	@NonNull
 	private String path_publico;
+	@NonNull
 	private String tipo;
 	private String detalle;
 	private String descripcion;
-	private String id_categoria;
-	private String nombre_usuario;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_supercategoria")
+	private Categoria categoria;
+
+	@ManyToOne
+	@JoinColumn(name = "nombre_usuario")
+	private String usuario;
+	
+	/**
+	 * 
+	 */
+	public Archivo() {
+		
+	}
+	/**
+	 * @param id
+	 * @param nombre
+	 * @param tamanyo
+	 * @param path_publico
+	 * @param tipo
+	 * @param detalle
+	 * @param descripcion
+	 * @param categoria
+	 * @param usuario
+	 */
+	public Archivo(int id, String nombre, String tamanyo, String path_publico, String tipo, String detalle,
+			String descripcion, Categoria categoria, String usuario) {
+		this.id = id;
+		this.nombre = nombre;
+		this.tamanyo = tamanyo;
+		this.path_publico = path_publico;
+		this.tipo = tipo;
+		this.detalle = detalle;
+		this.descripcion = descripcion;
+		this.categoria = categoria;
+		this.usuario = usuario;
+	}
 	/**
 	 * @return the id
 	 */
@@ -103,35 +149,36 @@ public class Archivo {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	
 	/**
-	 * @return the id_categoria
+	 * @return the categoria
 	 */
-	public String getId_categoria() {
-		return id_categoria;
-	}
-	/**
-	 * @param id_categoria the id_categoria to set
-	 */
-	public void setId_categoria(String id_categoria) {
-		this.id_categoria = id_categoria;
-	}
-	/**
-	 * @return the nombre_usuario
-	 */
-	public String getNombre_usuario() {
-		return nombre_usuario;
-	}
-	/**
-	 * @param nombre_usuario the nombre_usuario to set
-	 */
-	public void setNombre_usuario(String nombre_usuario) {
-		this.nombre_usuario = nombre_usuario;
+	public Categoria getCategoria() {
+		return categoria;
 	}
 	@Override
 	public String toString() {
 		return "Archivo [id=" + id + ", nombre=" + nombre + ", tamanyo=" + tamanyo + ", path_publico=" + path_publico
-				+ ", tipo=" + tipo + ", detalle=" + detalle + ", descripcion=" + descripcion + ", id_categoria="
-				+ id_categoria + ", nombre_usuario=" + nombre_usuario + "]";
+				+ ", tipo=" + tipo + ", detalle=" + detalle + ", descripcion=" + descripcion + ", categoria="
+				+ categoria + ", usuario=" + usuario + "]";
+	}
+	/**
+	 * @param categoria the categoria to set
+	 */
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+	/**
+	 * @return the usuario
+	 */
+	public String getUsuario() {
+		return usuario;
+	}
+	/**
+	 * @param usuario the usuario to set
+	 */
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 	
 	
