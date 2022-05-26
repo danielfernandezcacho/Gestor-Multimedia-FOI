@@ -36,18 +36,18 @@ public class ArchivoController {
 	ArchivoServiceImpl archivoServiceImpl;
 
 	@GetMapping("/")
-	public List<Archivo> listarAsignados() {
+	public List<Archivo> listarArchivo() {
 		return archivoServiceImpl.listarArchivo();
 	}
 
 	@PostMapping("/")
-	public Archivo salvarAsignado(@RequestBody Archivo archivo) {
+	public Archivo salvarArchivo(@RequestBody Archivo archivo) {
 
 		return archivoServiceImpl.guardarArchivo(archivo);
 	}
 
 	@GetMapping("/{id}")
-	public Archivo asignadoXID(@PathVariable(name = "id") int id) {
+	public Archivo archivoXID(@PathVariable(name = "id") int id) {
 
 		Archivo archivo_xid = new Archivo();
 
@@ -57,7 +57,7 @@ public class ArchivoController {
 	}
 
 	@PutMapping("/{id}")
-	public Archivo actualizarAsignado(@PathVariable(name = "id") int id, @RequestBody Archivo archivo) {
+	public Archivo actualizarArchivo(@PathVariable(name = "id") int id, @RequestBody Archivo archivo) {
 
 		Archivo archivo_seleccionado = new Archivo();
 		Archivo archivo_actualizado = new Archivo();
@@ -78,7 +78,7 @@ public class ArchivoController {
 	}
 
 	@DeleteMapping("/{id}")
-	public void eliminarAsignado(@PathVariable(name = "id") int id) {
+	public void eliminarArchivo(@PathVariable(name = "id") int id) {
 		archivoServiceImpl.eliminarArchivo(id);
 	}
 }
