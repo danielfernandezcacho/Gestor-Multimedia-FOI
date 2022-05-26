@@ -52,7 +52,9 @@ public class CategoriaController {
 
 		Categoria_seleccionado = categoriaServiceImpl.categoriaXID(id);
 
-		Categoria_seleccionado.setId(categoria.getId());
+		Categoria_seleccionado.setNombre(categoria.getNombre());
+		Categoria_seleccionado.setDescripcion(categoria.getDescripcion());
+		Categoria_seleccionado.setCategoria(categoria.getCategoria());
 
 		Categoria_actualizado = categoriaServiceImpl.actualizarCategoria(Categoria_seleccionado);
 
