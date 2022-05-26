@@ -34,7 +34,7 @@ public class ArchivoServiceImpl implements IArchivoService {
 	}
 
 	@Override
-	public Archivo asignadoXArchivo(int id) {
+	public Archivo archivoXID(int id) {
 		return iArchivoDAO.findById(id).get();
 	}
 
