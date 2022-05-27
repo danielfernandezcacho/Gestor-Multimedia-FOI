@@ -29,23 +29,18 @@ public class Categoria {
 	@NonNull
 	private String nombre;
 	private String descripcion;
-	
-	//@ManyToOne
-	//@JoinColumn(name = "id_supercategoria", referencedColumnName= "id")
-	//@JsonBackReference
 	@Column(name = "id_supercategoria")
 	private int superCategoria;
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "nombre_usuario")
 	private Usuario usuario;
 	
 	@OneToMany
-	@JoinColumn(name = "id_categoria")
+	@JoinColumn(name = "id")
 	private List<Archivo> archivo;
-	
-	
-	
+		
 	/**
 	 * 
 	 */
@@ -113,8 +108,8 @@ public class Categoria {
 	/**
 	 * @param categoria the categoria to set
 	 */
-	public void setCategoria(int categoria) {
-		this.superCategoria = categoria;
+	public void setSuperCategoria(int superCategoria) {
+		this.superCategoria = superCategoria;
 	}
 	/**
 	 * @return the usuario
