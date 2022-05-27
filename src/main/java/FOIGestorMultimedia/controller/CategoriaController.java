@@ -54,7 +54,7 @@ public class CategoriaController {
 
 		Categoria_seleccionado.setNombre(categoria.getNombre());
 		Categoria_seleccionado.setDescripcion(categoria.getDescripcion());
-		Categoria_seleccionado.setCategoria(categoria.getSuperCategoria());
+		Categoria_seleccionado.setSuperCategoria(categoria.getSuperCategoria());
 
 		Categoria_actualizado = categoriaServiceImpl.actualizarCategoria(Categoria_seleccionado);
 
