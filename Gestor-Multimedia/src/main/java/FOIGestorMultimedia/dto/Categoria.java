@@ -2,6 +2,7 @@ package FOIGestorMultimedia.dto;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ import org.springframework.lang.NonNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
+
 @Entity
 @Table(name="categoria")
 public class Categoria {
@@ -28,13 +30,15 @@ public class Categoria {
 	private String nombre;
 	private String descripcion;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_supercategoria")
-	 Categoria categoria;
-
+	//@ManyToOne
+	//@JoinColumn(name = "id_supercategoria", referencedColumnName= "id")
+	//@JsonBackReference
+	@Column(name = "id_supercategoria")
+	private int superCategoria;
+	
 	@ManyToOne
 	@JoinColumn(name = "nombre_usuario")
-	Usuario usuario;
+	private Usuario usuario;
 	
 	@OneToMany
 	@JoinColumn(name = "id_categoria")
@@ -52,14 +56,14 @@ public class Categoria {
 	 * @param id
 	 * @param nombre
 	 * @param descripcion
-	 * @param categoria
+	 * @param superCategoria
 	 * @param usuario
 	 */
-	public Categoria(int id, String nombre, String descripcion, Categoria categoria, Usuario usuario) {
+	public Categoria(int id, String nombre, String descripcion, int superCategoria, Usuario usuario) {
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.categoria = categoria;
+		this.superCategoria = superCategoria;
 		this.usuario = usuario;
 	}
 	/**
@@ -98,15 +102,19 @@ public class Categoria {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	/**
-	 * @return the nombre_usuario
-	 */
 	
 	/**
 	 * @return the categoria
 	 */
-	public Categoria getCategoria() {
-		return categoria;
+	public int getSuperCategoria() {
+		return superCategoria;
+	}
+	
+	/**
+	 * @param categoria the categoria to set
+	 */
+	public void setCategoria(int categoria) {
+		this.superCategoria = categoria;
 	}
 	/**
 	 * @return the usuario
@@ -120,12 +128,7 @@ public class Categoria {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	/**
-	 * @param categoria the categoria to set
-	 */
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
+	
 	/**
 	 * @return the archivo
 	 */
@@ -142,6 +145,9 @@ public class Categoria {
 	}
 	
 
+	
+
+	
 	
 	
 }

@@ -17,7 +17,7 @@ import FOIGestorMultimedia.dto.Categoria;
 import FOIGestorMultimedia.service.CategoriaServiceImpl;
 
 @RestController
-@RequestMapping("/categoria")
+@RequestMapping("/categorias")
 public class CategoriaController {
 
 	@Autowired
@@ -54,7 +54,7 @@ public class CategoriaController {
 
 		Categoria_seleccionado.setNombre(categoria.getNombre());
 		Categoria_seleccionado.setDescripcion(categoria.getDescripcion());
-		Categoria_seleccionado.setCategoria(categoria.getCategoria());
+		Categoria_seleccionado.setCategoria(categoria.getSuperCategoria());
 
 		Categoria_actualizado = categoriaServiceImpl.actualizarCategoria(Categoria_seleccionado);
 
