@@ -16,7 +16,6 @@ public class Archivo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
 	private int id;
 	@NonNull
 	private String nombre;
@@ -31,11 +30,11 @@ public class Archivo {
 	
 	@ManyToOne
 	@JoinColumn(name = "id_categoria")
-	Categoria categoria;
-
+	private Categoria categoria;
+	
 	@ManyToOne
 	@JoinColumn(name = "nombre_usuario")
-	Usuario usuario;
+	private Usuario usuario;
 	
 	/**
 	 * 
@@ -181,7 +180,6 @@ public class Archivo {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
 	
 	
 }

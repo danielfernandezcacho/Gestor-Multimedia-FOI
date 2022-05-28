@@ -37,6 +37,7 @@ public class ArchivoController {
 
 	@GetMapping("/")
 	public List<Archivo> listarArchivo() {
+
 		return archivoServiceImpl.listarArchivo();
 	}
 

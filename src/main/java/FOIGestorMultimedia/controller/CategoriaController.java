@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
 import FOIGestorMultimedia.dto.Categoria;
 import FOIGestorMultimedia.service.CategoriaServiceImpl;
 
@@ -47,18 +50,18 @@ public class CategoriaController {
 	@PutMapping("/{id}")
 	public Categoria actualizarCategoria(@PathVariable(name = "id") int id, @RequestBody Categoria categoria) {
 
-		Categoria Categoria_seleccionado = new Categoria();
-		Categoria Categoria_actualizado = new Categoria();
+		Categoria categoria_seleccionado = new Categoria();
+		Categoria categoria_actualizado = new Categoria();
 
-		Categoria_seleccionado = categoriaServiceImpl.categoriaXID(id);
+		categoria_seleccionado = categoriaServiceImpl.categoriaXID(id);
 
-		Categoria_seleccionado.setNombre(categoria.getNombre());
-		Categoria_seleccionado.setDescripcion(categoria.getDescripcion());
-		Categoria_seleccionado.setSuperCategoria(categoria.getSuperCategoria());
+		categoria_seleccionado.setNombre(categoria.getNombre());
+		categoria_seleccionado.setDescripcion(categoria.getDescripcion());
+		categoria_seleccionado.setSuperCategoria(categoria.getSuperCategoria());
 
-		Categoria_actualizado = categoriaServiceImpl.actualizarCategoria(Categoria_seleccionado);
+		categoria_actualizado = categoriaServiceImpl.actualizarCategoria(categoria_seleccionado);
 
-		return Categoria_actualizado;
+		return categoria_actualizado;
 	}
 
 	@DeleteMapping("/{id}")
