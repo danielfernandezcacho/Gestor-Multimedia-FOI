@@ -17,7 +17,6 @@ import org.springframework.lang.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 @Entity
 @Table(name="categoria")
 public class Categoria {
@@ -28,10 +27,10 @@ public class Categoria {
 	@NonNull
 	private String nombre;
 	private String descripcion;
-	
+
 	@Column(name = "id_supercategoria")
 	private int superCategoria;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "nombre_usuario")
 	private Usuario usuario;
@@ -39,9 +38,7 @@ public class Categoria {
 	@OneToMany
 	@JoinColumn(name = "id")
 	private List<Archivo> archivo;
-	
-	
-	
+
 	/**
 	 * 
 	 */
@@ -52,7 +49,7 @@ public class Categoria {
 	 * @param id
 	 * @param nombre
 	 * @param descripcion
-	 * @param categoria
+	 * @param superCategoria
 	 * @param usuario
 	 */
 	public Categoria(int id, String nombre, String descripcion, int superCategoria, Usuario usuario) {
@@ -99,15 +96,17 @@ public class Categoria {
 		this.descripcion = descripcion;
 	}
 	/**
-	 * @return the nombre_usuario
-	 */
-	
-	/**
 	 * @return the categoria
 	 */
 	public int getSuperCategoria() {
 		return superCategoria;
 	}
+
+
+	public void setSuperCategoria(int superCategoria) {
+		this.superCategoria = superCategoria;
+	}
+
 	/**
 	 * @return the usuario
 	 */
@@ -120,12 +119,7 @@ public class Categoria {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	/**
-	 * @param categoria the categoria to set
-	 */
-	public void setSuperCategoria(int superCategoria) {
-		this.superCategoria = superCategoria;
-	}
+
 	/**
 	 * @return the archivo
 	 */
@@ -140,8 +134,5 @@ public class Categoria {
 	public void setArchivo(List<Archivo> archivo) {
 		this.archivo = archivo;
 	}
-	
-
-	
-	
+		
 }

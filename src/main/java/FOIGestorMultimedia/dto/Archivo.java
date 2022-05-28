@@ -31,7 +31,7 @@ public class Archivo {
 	@ManyToOne
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "nombre_usuario")
 	private Usuario usuario;
@@ -180,7 +180,6 @@ public class Archivo {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
 	
 	
 }

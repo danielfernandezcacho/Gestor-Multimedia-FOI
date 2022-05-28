@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Usuario {
 
 	@Id
+	@Column(name = "nombre")
 	private String nombre;
 	@NonNull
 	private String contrasenya;

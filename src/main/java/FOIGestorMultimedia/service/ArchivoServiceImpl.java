@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import FOIGestorMultimedia.dto.Archivo;
 import FOIGestorMultimedia.dao.IArchivoDAO;
 
+import FOIGestorMultimedia.dao.IUsuarioDAO;
+
 
 /**
  * @author danif

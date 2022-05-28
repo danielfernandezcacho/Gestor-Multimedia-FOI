@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import org.springframework.data.jpa.repository.JpaRepository;
+
+
 import FOIGestorMultimedia.dto.Categoria;
 import FOIGestorMultimedia.service.CategoriaServiceImpl;
 
@@ -62,7 +65,7 @@ public class CategoriaController {
 	}
 
 	@DeleteMapping("/{id}")
-	public void eliminarAsignado(@PathVariable(name = "id") int id) {
+	public void eliminarCategoria(@PathVariable(name = "id") int id) {
 		categoriaServiceImpl.eliminarCategoria(id);
 	}
 
