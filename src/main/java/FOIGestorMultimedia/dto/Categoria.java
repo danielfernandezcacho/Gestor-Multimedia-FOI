@@ -2,6 +2,7 @@ package FOIGestorMultimedia.dto;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -28,16 +29,15 @@ public class Categoria {
 	private String nombre;
 	private String descripcion;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_supercategoria")
-	private Categoria categoria;
+	@Column(name = "id_supercategoria")
+	private int superCategoria;
 
 	@ManyToOne
 	@JoinColumn(name = "nombre_usuario")
-	private String usuario;
+	private Usuario usuario;
 	
 	@OneToMany
-	@JoinColumn(name = "id_categoria")
+	@JoinColumn(name = "id")
 	private List<Archivo> archivo;
 	
 	
@@ -55,11 +55,11 @@ public class Categoria {
 	 * @param categoria
 	 * @param usuario
 	 */
-	public Categoria(int id, String nombre, String descripcion, Categoria categoria, String usuario) {
+	public Categoria(int id, String nombre, String descripcion, int superCategoria, Usuario usuario) {
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.categoria = categoria;
+		this.superCategoria = superCategoria;
 		this.usuario = usuario;
 	}
 	/**
@@ -105,26 +105,26 @@ public class Categoria {
 	/**
 	 * @return the categoria
 	 */
-	public Categoria getCategoria() {
-		return categoria;
+	public int getSuperCategoria() {
+		return superCategoria;
 	}
 	/**
 	 * @return the usuario
 	 */
-	public String getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 	/**
 	 * @param usuario the usuario to set
 	 */
-	public void setUsuario(String usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 	/**
 	 * @param categoria the categoria to set
 	 */
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
+	public void setSuperCategoria(int superCategoria) {
+		this.superCategoria = superCategoria;
 	}
 	/**
 	 * @return the archivo

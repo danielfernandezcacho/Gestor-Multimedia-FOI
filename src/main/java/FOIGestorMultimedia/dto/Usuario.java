@@ -23,7 +23,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Usuario {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String nombre;
 	@NonNull
 	private String contrasenya;
