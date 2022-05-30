@@ -2,6 +2,7 @@ package FOIGestorMultimedia.dto;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,8 +36,8 @@ public class Categoria {
 	@JoinColumn(name = "nombre_usuario")
 	private Usuario usuario;
 	
-	@OneToMany
-	@JoinColumn(name = "id")
+	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
+
 	private List<Archivo> archivo;
 
 	/**
