@@ -2,13 +2,13 @@ package FOIGestorMultimedia.dto;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,7 +23,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Usuario {
 
 	@Id
-	@Column(name = "nombre")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	@NonNull
+	@Column(name = "nombre", unique= true)
 	private String nombre;
 	@NonNull
 	private String contrasenya;
@@ -31,12 +34,10 @@ public class Usuario {
 	@Column(columnDefinition = "boolean default false")
 	private boolean superusuario;
 	
-	@OneToMany
-	@JoinColumn(name = "nombre_usuario")
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<Categoria> categoria;
 	
-	@OneToMany
-	@JoinColumn(name = "nombre_usuario")
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<Archivo> archivo;
 	
 	/**
@@ -55,6 +56,20 @@ public class Usuario {
 		this.contrasenya = contrasenya;
 		this.superusuario = superusuario;
 	}
+	
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	/**
 	 * @return the nombre
 	 */
@@ -79,18 +94,7 @@ public class Usuario {
 	public void setContrasenya(String contrasenya) {
 		this.contrasenya = contrasenya;
 	}
-	/**
-	 * @return the superusuario
-	 */
-	public Boolean getSuperusuario() {
-		return superusuario;
-	}
-	/**
-	 * @param superusuario the superusuario to set
-	 */
-	public void setSuperusuario(Boolean superusuario) {
-		this.superusuario = superusuario;
-	}
+
 	@Override
 	public String toString() {
 		return "Usuario [nombre=" + nombre + ", contrasenya=" + contrasenya + ", superusuario=" + superusuario + "]";
@@ -122,6 +126,18 @@ public class Usuario {
 	 */
 	public void setArchivo(List<Archivo> archivo) {
 		this.archivo = archivo;
+	}
+	/**
+	 * @return the superusuario
+	 */
+	public boolean isSuperusuario() {
+		return superusuario;
+	}
+	/**
+	 * @param superusuario the superusuario to set
+	 */
+	public void setSuperusuario(boolean superusuario) {
+		this.superusuario = superusuario;
 	}
 	
 	

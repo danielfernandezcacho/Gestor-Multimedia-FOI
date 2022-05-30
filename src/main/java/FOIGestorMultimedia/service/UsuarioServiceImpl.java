@@ -25,8 +25,8 @@ public class UsuarioServiceImpl implements IUsuarioService{
 	}
 
 	@Override
-	public Usuario usuarioXNombre(String nombre) {
-		return iUsuarioDAO.findById(nombre).get();
+	public Usuario usuarioXID(int id) {
+		return iUsuarioDAO.findById(id).get();
 	}
 
 	@Override
@@ -35,8 +35,8 @@ public class UsuarioServiceImpl implements IUsuarioService{
 	}
 
 	@Override
-	public void eliminarUsuario(String nombre) {
-		iUsuarioDAO.deleteById(nombre);
+	public void eliminarUsuario(int id) {
+		iUsuarioDAO.deleteById(id);
 	}
 	
 }
