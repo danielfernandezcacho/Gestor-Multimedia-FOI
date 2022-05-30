@@ -29,12 +29,12 @@ public class Archivo {
 	private String detalle;
 	private String descripcion;
 	
-	@ManyToOne  (cascade = CascadeType.ALL)
+	@ManyToOne 
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
 	
-	@ManyToOne  (cascade = CascadeType.ALL)
-	@JoinColumn(name = "nombre_usuario")
+	@ManyToOne 
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 	
 	/**
