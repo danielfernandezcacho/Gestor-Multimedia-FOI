@@ -46,7 +46,7 @@ public class UsuarioServiceImpl implements IUsuarioService, UserDetailsService{
 	public void eliminarUsuario(int id) {
 		iUsuarioDAO.deleteById(id);
 	}
-
+	
 	//Metodos de UserDetailsService
 	
 	public UsuarioServiceImpl(IUsuarioDAO iUsuarioDAO) {
@@ -55,7 +55,7 @@ public class UsuarioServiceImpl implements IUsuarioService, UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Usuario usuario = iUsuarioDAO.findByUsername(username);
+		Usuario usuario = iUsuarioDAO.findByNombre(username);
 		if (usuario == null) {
 			throw new UsernameNotFoundException(username);
 		}
