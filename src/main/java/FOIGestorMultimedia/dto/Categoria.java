@@ -33,11 +33,10 @@ public class Categoria {
 	private int superCategoria;
 	
 	@ManyToOne
-	@JoinColumn(name = "nombre_usuario")
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 	
 	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
-
 	private List<Archivo> archivo;
 
 	/**
