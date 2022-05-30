@@ -46,35 +46,35 @@ public class UsuarioController {
 		return usuarioServiceImpl.guardarUsuario(usuario);
 	}
 
-	@GetMapping("/{nombre}")
-	public Usuario usuariosXnombre(@PathVariable(name = "nombre") String nombre) {
+	@GetMapping("/{id}")
+	public Usuario usuariosXID(@PathVariable(name = "id") int id) {
 
 		Usuario usuario_xid = new Usuario();
 
-		usuario_xid = usuarioServiceImpl.usuarioXNombre(nombre);
+		usuario_xid = usuarioServiceImpl.usuarioXID(id);
 
 		return usuario_xid;
 	}
 
-	@PutMapping("/{nombre}")
-	public Usuario actualizarUsuarios(@PathVariable(name = "nombre") String nombre, @RequestBody Usuario usuario) {
+	@PutMapping("/{id}")
+	public Usuario actualizarUsuarios(@PathVariable(name = "id") int id, @RequestBody Usuario usuario) {
 
 		Usuario usuario_seleccionado = new Usuario();
 		Usuario usuario_actualizado = new Usuario();
 
-		usuario_seleccionado = usuarioServiceImpl.usuarioXNombre(nombre);
+		usuario_seleccionado = usuarioServiceImpl.usuarioXID(id);
 
 		usuario_seleccionado.setNombre(usuario.getNombre());
 		usuario_seleccionado.setContrasenya(usuario.getContrasenya());
-		usuario_seleccionado.setSuperusuario(usuario.getSuperusuario());
+		usuario_seleccionado.setSuperusuario(usuario.isSuperusuario());
 		
 		usuario_actualizado = usuarioServiceImpl.actualizarUsuario(usuario_seleccionado);
 
 		return usuario_actualizado;
 	}
 
-	@DeleteMapping("/{nombre}")
-	public void eliminarUsuarios(@PathVariable(name = "nombre") String nombre) {
-		usuarioServiceImpl.eliminarUsuario(nombre);
+	@DeleteMapping("/{id}")
+	public void eliminarUsuarios(@PathVariable(name = "id") int id) {
+		usuarioServiceImpl.eliminarUsuario(id);
 	}
 }
