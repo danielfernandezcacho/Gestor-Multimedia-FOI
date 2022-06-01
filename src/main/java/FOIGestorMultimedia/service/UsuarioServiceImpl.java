@@ -1,15 +1,20 @@
 package FOIGestorMultimedia.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import FOIGestorMultimedia.dao.IUsuarioDAO;
 import FOIGestorMultimedia.dto.Usuario;
 
 @Service
-public class UsuarioServiceImpl implements IUsuarioService{
+public class UsuarioServiceImpl implements IUsuarioService, UserDetailsService{
 	
 	@Autowired
 	IUsuarioDAO iUsuarioDAO;
@@ -37,6 +42,12 @@ public class UsuarioServiceImpl implements IUsuarioService{
 	@Override
 	public void eliminarUsuario(int id) {
 		iUsuarioDAO.deleteById(id);
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+		return new User("GestorFoi", "{noop}FOI_2022",new ArrayList<>()) ;
 	}
 	
 }
