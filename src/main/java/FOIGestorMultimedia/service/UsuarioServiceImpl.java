@@ -19,6 +19,8 @@ public class UsuarioServiceImpl implements IUsuarioService, UserDetailsService{
 	@Autowired
 	IUsuarioDAO iUsuarioDAO;
 
+	//Metodos CRUD
+	
 	@Override
 	public List<Usuario> listarUsuario() {
 		return iUsuarioDAO.findAll();
@@ -46,8 +48,11 @@ public class UsuarioServiceImpl implements IUsuarioService, UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-		return new User("GestorFoi", "{noop}FOI_2022",new ArrayList<>()) ;
+		Usuario usuario = iUsuarioDAO.findByNombre(username);
+		if (usuario == null) {
+			throw new UsernameNotFoundException(username);
+		}
+		return new User(usuario.getNombre(), usuario.getContrasenya(), new ArrayList<>());
 	}
 	
 }
