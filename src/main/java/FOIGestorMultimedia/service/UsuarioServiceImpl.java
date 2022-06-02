@@ -59,7 +59,7 @@ public class UsuarioServiceImpl implements IUsuarioService, UserDetailsService{
 		if (usuario == null) {
 			throw new UsernameNotFoundException(username);
 		}
-		return new User(usuario.getNombre(), usuario.getContrasenya(), emptyList());
+		return new User(usuario.getNombre(), usuario.getContrasenya(), usuario.getAuthorities());
 	}
 	
 }

@@ -1,10 +1,14 @@
 package FOIGestorMultimedia.dto;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +16,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.Role;
 import org.springframework.lang.NonNull;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -20,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="usuario")
-public class Usuario {
+public class Usuario implements UserDetails{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,15 +38,15 @@ public class Usuario {
 	private String nombre;
 	@NonNull
 	private String contrasenya;
-	@NonNull
-	@Column(columnDefinition = "boolean default false")
-	private boolean superusuario;
 	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<Categoria> categoria;
 	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<Archivo> archivo;
+	
+	@Enumerated(EnumType.STRING)
+	public Role rol;
 	
 	/**
 	 * 
@@ -54,7 +62,6 @@ public class Usuario {
 	public Usuario(String nombre, String contrasenya, boolean superusuario) {
 		this.nombre = nombre;
 		this.contrasenya = contrasenya;
-		this.superusuario = superusuario;
 	}
 	
 	/**
@@ -97,7 +104,7 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [nombre=" + nombre + ", contrasenya=" + contrasenya + ", superusuario=" + superusuario + "]";
+		return "Usuario [nombre=" + nombre + ", contrasenya=" + contrasenya + "]";
 	}
 	/**
 	 * @return the categoria
@@ -127,17 +134,48 @@ public class Usuario {
 	public void setArchivo(List<Archivo> archivo) {
 		this.archivo = archivo;
 	}
-	/**
-	 * @return the superusuario
-	 */
-	public boolean isSuperusuario() {
-		return superusuario;
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> roles = new ArrayList<>();
+        roles.add(new SimpleGrantedAuthority(rol.toString()));
+        return roles;
+	}
+	@Override
+	public String getPassword() {
+		return getContrasenya();
+	}
+	@Override
+	public String getUsername() {
+		return getNombre();
+	}
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 	/**
-	 * @param superusuario the superusuario to set
+	 * @return the role
 	 */
-	public void setSuperusuario(boolean superusuario) {
-		this.superusuario = superusuario;
+	public Role getRol() {
+		return rol;
+	}
+	/**
+	 * @param role the role to set
+	 */
+	public void setRol(Role rol) {
+		this.rol = rol;
 	}
 	
 	
