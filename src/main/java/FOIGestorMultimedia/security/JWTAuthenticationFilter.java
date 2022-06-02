@@ -9,6 +9,7 @@ import static FOIGestorMultimedia.security.Constants.TOKEN_EXPIRATION_TIME;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -19,12 +20,15 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import FOIGestorMultimedia.dto.Rol;
 import FOIGestorMultimedia.dto.Usuario;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -42,9 +46,20 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			throws AuthenticationException {
 		try {
 			Usuario credenciales = new ObjectMapper().readValue(request.getInputStream(), Usuario.class);
-
+			List<GrantedAuthority> roles = new ArrayList<>();
+			if (credenciales.isSuperusuario()) {
+				
+				roles.add(new SimpleGrantedAuthority(Rol.ROLE_ADMIN.toString()));
+				roles.add(new SimpleGrantedAuthority(Rol.ROLE_USER.toString()));
+				
+			} else {
+			
+				roles.add(new SimpleGrantedAuthority(Rol.ROLE_USER.toString()));
+				
+			}
+		    	
 			return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-					credenciales.getNombre(), credenciales.getContrasenya(), new ArrayList<>()));
+					credenciales.getNombre(), credenciales.getContrasenya(), roles));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

@@ -1,9 +1,12 @@
 package FOIGestorMultimedia.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import FOIGestorMultimedia.dao.IUsuarioDAO;
 import FOIGestorMultimedia.dto.Usuario;
+import FOIGestorMultimedia.dto.Rol;
 
 @Service
 public class UsuarioServiceImpl implements IUsuarioService, UserDetailsService{
@@ -52,7 +56,19 @@ public class UsuarioServiceImpl implements IUsuarioService, UserDetailsService{
 		if (usuario == null) {
 			throw new UsernameNotFoundException(username);
 		}
-		return new User(usuario.getNombre(), usuario.getContrasenya(), new ArrayList<>());
+		List<GrantedAuthority> roles = new ArrayList<>();
+		if (usuario.isSuperusuario()) {
+			
+			roles.add(new SimpleGrantedAuthority(Rol.ROLE_ADMIN.toString()));
+			roles.add(new SimpleGrantedAuthority(Rol.ROLE_USER.toString()));
+			
+		} else {
+		
+			roles.add(new SimpleGrantedAuthority(Rol.ROLE_USER.toString()));
+			
+		}
+	    			
+		return new User(usuario.getNombre(), usuario.getContrasenya(), roles);
 	}
 	
 }
