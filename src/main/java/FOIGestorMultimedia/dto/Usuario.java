@@ -16,7 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.context.annotation.Role;
 import org.springframework.lang.NonNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -46,7 +45,7 @@ public class Usuario implements UserDetails{
 	private List<Archivo> archivo;
 	
 	@Enumerated(EnumType.STRING)
-	public Role rol;
+	public Rol rol;
 	
 	/**
 	 * 
@@ -168,13 +167,13 @@ public class Usuario implements UserDetails{
 	/**
 	 * @return the role
 	 */
-	public Role getRol() {
+	public Rol getRol() {
 		return rol;
 	}
 	/**
 	 * @param role the role to set
 	 */
-	public void setRol(Role rol) {
+	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
 	

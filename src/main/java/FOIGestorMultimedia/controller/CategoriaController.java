@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import FOIGestorMultimedia.dto.Categoria;
 import FOIGestorMultimedia.service.CategoriaServiceImpl;
@@ -26,17 +26,20 @@ public class CategoriaController {
 	@Autowired
 	CategoriaServiceImpl categoriaServiceImpl;
 
+	@PreAuthorize("hasAnyAuthority('USER')")
 	@GetMapping("/")
 	public List<Categoria> listarCategoria() {
 		return categoriaServiceImpl.listarCategoria();
 	}
 
+	@PreAuthorize("hasAnyAuthority('USER')")
 	@PostMapping("/")
 	public Categoria salvarCategoria(@RequestBody Categoria categoria) {
 
 		return categoriaServiceImpl.guardarCategoria(categoria);
 	}
 
+	@PreAuthorize("hasAnyAuthority('USER')")
 	@GetMapping("/{id}")
 	public Categoria CategoriaXID(@PathVariable(name = "id") int id) {
 
@@ -47,6 +50,7 @@ public class CategoriaController {
 		return categoria_xid ;
 	}
 
+	@PreAuthorize("hasAnyAuthority('USER')")
 	@PutMapping("/{id}")
 	public Categoria actualizarCategoria(@PathVariable(name = "id") int id, @RequestBody Categoria categoria) {
 
@@ -64,6 +68,7 @@ public class CategoriaController {
 		return categoria_actualizado;
 	}
 
+	@PreAuthorize("hasAnyAuthority('USER')")
 	@DeleteMapping("/{id}")
 	public void eliminarCategoria(@PathVariable(name = "id") int id) {
 		categoriaServiceImpl.eliminarCategoria(id);
