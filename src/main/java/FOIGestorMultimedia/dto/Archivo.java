@@ -1,6 +1,5 @@
 package FOIGestorMultimedia.dto;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,11 +28,11 @@ public class Archivo {
 	private String detalle;
 	private String descripcion;
 	
-	@ManyToOne 
+	@ManyToOne
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
 	
-	@ManyToOne 
+	@ManyToOne
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 	
