@@ -54,6 +54,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication auth) throws IOException, ServletException {
 		System.out.println(ISSUER_INFO + "hola");
+		
 		String token = Jwts.builder().setIssuedAt(new Date()).setIssuer(ISSUER_INFO)
 				.setSubject(((User)auth.getPrincipal()).getUsername())
 				.claim("roles", auth.getAuthorities().iterator().next().getAuthority())
