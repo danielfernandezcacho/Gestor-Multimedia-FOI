@@ -43,14 +43,14 @@ public class ArchivoController {
 		return archivoServiceImpl.listarArchivo();
 	}
 
-	@PreAuthorize("hasAnyAuthority('USER')")
+	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	@PostMapping("/")
 	public Archivo salvarArchivo(@RequestBody Archivo archivo) {
 
 		return archivoServiceImpl.guardarArchivo(archivo);
 	}
 	
-	@PreAuthorize("hasAnyAuthority('USER')")
+	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	@GetMapping("/{id}")
 	public Archivo archivoXID(@PathVariable(name = "id") int id) {
 
@@ -61,7 +61,7 @@ public class ArchivoController {
 		return archivo_xid;
 	}
 
-	@PreAuthorize("hasAnyAuthority('USER')")
+	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	@PutMapping("/{id}")
 	public Archivo actualizarArchivo(@PathVariable(name = "id") int id, @RequestBody Archivo archivo) {
 
@@ -83,7 +83,7 @@ public class ArchivoController {
 		return archivo_actualizado;
 	}
 
-	@PreAuthorize("hasAnyAuthority('USER')")
+	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	@DeleteMapping("/{id}")
 	public void eliminarArchivo(@PathVariable(name = "id") int id) {
 		archivoServiceImpl.eliminarArchivo(id);
