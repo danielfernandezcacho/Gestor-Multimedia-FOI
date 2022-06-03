@@ -36,7 +36,7 @@ public class ArchivoController {
 	@Autowired
 	ArchivoServiceImpl archivoServiceImpl;
 
-	@PreAuthorize("hasAnyAuthority('USER')")
+	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	@GetMapping("/")
 	public List<Archivo> listarArchivo() {
 
