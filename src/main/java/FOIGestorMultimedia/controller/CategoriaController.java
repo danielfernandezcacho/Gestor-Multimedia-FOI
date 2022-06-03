@@ -27,7 +27,7 @@ public class CategoriaController {
 	CategoriaServiceImpl categoriaServiceImpl;
 
 	//and... para que el mismo usuario vea sus categorias
-	@PreAuthorize("hasAnyAuthority('USER') and #usuario.id == #id")
+	@PreAuthorize("hasAnyAuthority('USER')")
 	@GetMapping("/")
 	public List<Categoria> listarCategoria() {
 		return categoriaServiceImpl.listarCategoria();
