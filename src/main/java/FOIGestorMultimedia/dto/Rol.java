@@ -14,8 +14,6 @@ package FOIGestorMultimedia.dto;
  *
  */
 public enum Rol {
-
 	ADMIN,
     USER;
-	
 }

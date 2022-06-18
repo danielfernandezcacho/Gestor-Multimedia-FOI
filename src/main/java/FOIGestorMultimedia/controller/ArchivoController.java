@@ -76,6 +76,7 @@ public class ArchivoController {
 		archivo_seleccionado.setDetalle(archivo.getDetalle());
 		archivo_seleccionado.setDescripcion(archivo.getDescripcion());
 		archivo_seleccionado.setCategoria(archivo.getCategoria());
+		archivo_actualizado.setData(archivo.getData());
 		
 
 		archivo_actualizado = archivoServiceImpl.actualizarArchivo(archivo_seleccionado);

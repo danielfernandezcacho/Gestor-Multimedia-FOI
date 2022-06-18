@@ -28,10 +28,9 @@ public class Archivo {
 	private String tipo;
 	private String detalle;
 	private String descripcion;
-	//@Lob
-	//private byte[] data;
+	@Lob
+	private byte[] data;
 
-	
 	@ManyToOne
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
@@ -57,7 +56,7 @@ public class Archivo {
 	 * @param categoria
 	 * @param usuario
 	 */
-	public Archivo(int id, String nombre, String tamanyo, String path_publico, String tipo, String detalle,
+	public Archivo(int id, String nombre, String tamanyo, String path_publico, String tipo, String detalle,byte[] data,
 			String descripcion, Categoria categoria, Usuario usuario) {
 		this.id = id;
 		this.nombre = nombre;
@@ -68,7 +67,9 @@ public class Archivo {
 		this.descripcion = descripcion;
 		this.categoria = categoria;
 		this.usuario = usuario;
+		this.data = data;
 	}
+
 	/**
 	 * @return the id
 	 */
@@ -140,6 +141,13 @@ public class Archivo {
 	 */
 	public void setDetalle(String detalle) {
 		this.detalle = detalle;
+	}
+	
+	public byte[] getData() {
+		return data;
+	}
+	public void setData(byte[] data) {
+		this.data = data;
 	}
 	/**
 	 * @return the descripcion
