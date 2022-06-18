@@ -41,6 +41,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
 		try {
+			System.out.println(ISSUER_INFO + "holaaaa");
+
 			Usuario credenciales = new ObjectMapper().readValue(request.getInputStream(), Usuario.class);
 
 			return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -63,7 +65,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		response.addHeader(HEADER_AUTHORIZACION_KEY, TOKEN_BEARER_PREFIX + " " + token);//devuelve token por cabecera
 		response.getWriter().write("{\"token\": \"" + token + "\"}");//devuelve token por body
 		System.out.println(response.getHeader(HEADER_AUTHORIZACION_KEY));
-	
 	}
 	
 	

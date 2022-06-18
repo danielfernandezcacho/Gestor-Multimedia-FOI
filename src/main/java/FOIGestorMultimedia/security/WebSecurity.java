@@ -42,6 +42,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		 * 4. Se indica que el login no requiere autenticación
 		 * 5. Se indica que el resto de URLs esten securizadas
 		 */
+		
 		httpSecurity
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.cors().and()
