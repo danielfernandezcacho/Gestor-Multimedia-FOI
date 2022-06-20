@@ -9,10 +9,20 @@
  */
 package FOIGestorMultimedia.controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +30,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import FOIGestorMultimedia.dto.Archivo;
 import FOIGestorMultimedia.service.ArchivoServiceImpl;
@@ -29,9 +41,13 @@ import FOIGestorMultimedia.service.ArchivoServiceImpl;
  * ArchivoController.java
  *
  */
+
+@EnableJpaRepositories
 @RestController
 @RequestMapping("/archivos")
 public class ArchivoController {
+	
+	String FILE_DIRECTORY;
 
 	@Autowired
 	ArchivoServiceImpl archivoServiceImpl;
@@ -43,12 +59,22 @@ public class ArchivoController {
 		return archivoServiceImpl.listarArchivo();
 	}
 
+	
 	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
-	@PostMapping("/")
-	public Archivo salvarArchivo(@RequestBody Archivo archivo) {
+	@Value("${file.upload-dir}")
+	@PostMapping("/subir")
+	public Archivo salvarArchivo(@RequestParam("File") MultipartFile data) throws IOException {
 
-		return archivoServiceImpl.guardarArchivo(archivo);
-	}
+		File file = new File(FILE_DIRECTORY + data.getOriginalFilename());
+		file.createNewFile();
+		FileOutputStream fos = new FileOutputStream(file);
+		fos.write(data.getBytes());
+		Archivo archivo = new Archivo();
+		archivo.setNombre(data.getOriginalFilename());
+		
+		fos.close();
+		
+		return archivoServiceImpl.guardarArchivo(archivo);	}
 	
 	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	@GetMapping("/{id}")
@@ -76,7 +102,7 @@ public class ArchivoController {
 		archivo_seleccionado.setDetalle(archivo.getDetalle());
 		archivo_seleccionado.setDescripcion(archivo.getDescripcion());
 		archivo_seleccionado.setCategoria(archivo.getCategoria());
-		archivo_actualizado.setData(archivo.getData());
+		//archivo_actualizado.setData(archivo.getData());
 		
 
 		archivo_actualizado = archivoServiceImpl.actualizarArchivo(archivo_seleccionado);
