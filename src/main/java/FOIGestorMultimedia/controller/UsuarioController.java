@@ -71,7 +71,7 @@ public class UsuarioController {
 		return usuario;
 	}
 
-	//@PreAuthorize("hasAnyAuthority('ADMIN')")
+	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	@GetMapping("/")
 	public List<Usuario> listarUsuario() {
 		return usuarioServiceImpl.listarUsuario();

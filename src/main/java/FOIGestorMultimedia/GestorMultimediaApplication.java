@@ -2,8 +2,10 @@ package FOIGestorMultimedia;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@ComponentScan(basePackages = {"com.FOIGestorMultimedia"})
 public class GestorMultimediaApplication {
 
 	public static void main(String[] args) {

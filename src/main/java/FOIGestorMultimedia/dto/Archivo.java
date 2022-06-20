@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.springframework.web.multipart.MultipartFile;
 
 import org.springframework.lang.NonNull;
 
@@ -28,6 +29,7 @@ public class Archivo {
 	private String tipo;
 	private String detalle;
 	private String descripcion;
+	
 	@Lob
 	private byte[] data;
 
@@ -67,7 +69,6 @@ public class Archivo {
 		this.descripcion = descripcion;
 		this.categoria = categoria;
 		this.usuario = usuario;
-		this.data = data;
 	}
 
 	/**
@@ -143,12 +144,6 @@ public class Archivo {
 		this.detalle = detalle;
 	}
 	
-	public byte[] getData() {
-		return data;
-	}
-	public void setData(byte[] data) {
-		this.data = data;
-	}
 	/**
 	 * @return the descripcion
 	 */
