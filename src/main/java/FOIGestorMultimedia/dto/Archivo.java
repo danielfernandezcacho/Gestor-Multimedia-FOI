@@ -20,10 +20,7 @@ public class Archivo {
 	private int id;
 	@NonNull
 	private String nombre;
-	@NonNull
-	private String tamanyo;
-	@NonNull
-	private String path_publico;
+
 	@NonNull
 	private String tipo;
 	
@@ -95,30 +92,9 @@ public class Archivo {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	/**
-	 * @return the tamanyo
-	 */
-	public String getTamanyo() {
-		return tamanyo;
-	}
-	/**
-	 * @param tamanyo the tamanyo to set
-	 */
-	public void setTamanyo(String tamanyo) {
-		this.tamanyo = tamanyo;
-	}
-	/**
-	 * @return the path_publico
-	 */
-	public String getPath_publico() {
-		return path_publico;
-	}
-	/**
-	 * @param path_publico the path_publico to set
-	 */
-	public void setPath_publico(String path_publico) {
-		this.path_publico = path_publico;
-	}
+
+
+
 	/**
 	 * @return the tipo
 	 */
@@ -142,8 +118,7 @@ public class Archivo {
 	}
 	@Override
 	public String toString() {
-		return "Archivo [id=" + id + ", nombre=" + nombre + ", tamanyo=" + tamanyo + ", path_publico=" + path_publico
-				+ ", tipo=" + tipo  + ", categoria="
+		return "Archivo [id=" + id + ", nombre=" + nombre + ", tipo=" + tipo  + ", categoria="
 				+ categoria + ", usuario=" + usuario + "]";
 	}
 	/**
