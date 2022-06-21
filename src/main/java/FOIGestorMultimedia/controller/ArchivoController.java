@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -35,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import FOIGestorMultimedia.dto.Archivo;
 import FOIGestorMultimedia.service.ArchivoServiceImpl;
@@ -61,9 +63,16 @@ public class ArchivoController {
 
 	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	@PostMapping("/subir")
-	public Archivo salvarArchivo(@RequestParam("file") MultipartFile files) throws Exception {
+	public Response salvarArchivo(@RequestParam("file") MultipartFile files) throws Exception {
 	
-		return archivoServiceImpl.guardarArchivo(files);
+		Archivo archivo = archivoServiceImpl.guardarArchivo(files);
+
+	        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+	            .path("/downloadFile/")
+	            .path(archivo.getNombre())
+	            .toUriString();
+
+	        return new Response();
 	}
 
 	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
