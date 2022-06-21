@@ -8,7 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import org.springframework.web.multipart.MultipartFile;
 
 import org.springframework.lang.NonNull;
 
@@ -27,8 +26,6 @@ public class Archivo {
 	private String path_publico;
 	@NonNull
 	private String tipo;
-	private String detalle;
-	private String descripcion;
 	
 	@Lob
 	private byte[] data;
@@ -41,6 +38,12 @@ public class Archivo {
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 	
+	public byte[] getData() {
+		return data;
+	}
+	public void setData(byte[] data) {
+		this.data = data;
+	}
 	/**
 	 * 
 	 */
@@ -58,17 +61,14 @@ public class Archivo {
 	 * @param categoria
 	 * @param usuario
 	 */
-	public Archivo(int id, String nombre, String tamanyo, String path_publico, String tipo, String detalle,byte[] data,
-			String descripcion, Categoria categoria, Usuario usuario) {
-		this.id = id;
+	public Archivo(String nombre, String tipo,byte[] data/*,
+			 Categoria categoria, Usuario usuario*/) {
+
 		this.nombre = nombre;
-		this.tamanyo = tamanyo;
-		this.path_publico = path_publico;
 		this.tipo = tipo;
-		this.detalle = detalle;
-		this.descripcion = descripcion;
-		this.categoria = categoria;
-		this.usuario = usuario;
+		this.data = data;
+		/*this.categoria = categoria;
+		this.usuario = usuario;*/
 	}
 
 	/**
@@ -131,31 +131,8 @@ public class Archivo {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	/**
-	 * @return the detalle
-	 */
-	public String getDetalle() {
-		return detalle;
-	}
-	/**
-	 * @param detalle the detalle to set
-	 */
-	public void setDetalle(String detalle) {
-		this.detalle = detalle;
-	}
-	
-	/**
-	 * @return the descripcion
-	 */
-	public String getDescripcion() {
-		return descripcion;
-	}
-	/**
-	 * @param descripcion the descripcion to set
-	 */
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+
+
 	
 	/**
 	 * @return the categoria
@@ -166,7 +143,7 @@ public class Archivo {
 	@Override
 	public String toString() {
 		return "Archivo [id=" + id + ", nombre=" + nombre + ", tamanyo=" + tamanyo + ", path_publico=" + path_publico
-				+ ", tipo=" + tipo + ", detalle=" + detalle + ", descripcion=" + descripcion + ", categoria="
+				+ ", tipo=" + tipo  + ", categoria="
 				+ categoria + ", usuario=" + usuario + "]";
 	}
 	/**
