@@ -34,14 +34,14 @@ public class ArchivoServiceImpl implements IArchivoService {
 	public Archivo guardarArchivo(MultipartFile file) throws Exception {
 	     // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-
+       
         try {
             // Check if the file's name contains invalid characters
             if (fileName.contains("..")) {
                 throw new Exception("Sorry! Filename contains invalid path sequence " + fileName);
             }
 
-            Archivo dbFile = new Archivo(fileName,file.getContentType(), file.getBytes());
+            Archivo dbFile = new Archivo(fileName,file.getContentType(), file.getBytes(),null,null);
 
             return iArchivoDAO.save(dbFile);
         } catch (IOException ex) {
