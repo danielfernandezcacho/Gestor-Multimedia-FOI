@@ -12,6 +12,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import FOIGestorMultimedia.dto.Archivo;
+import FOIGestorMultimedia.dto.Categoria;
+import FOIGestorMultimedia.dto.Usuario;
 import FOIGestorMultimedia.dao.IArchivoDAO;
 
 /**
@@ -34,6 +36,8 @@ public class ArchivoServiceImpl implements IArchivoService {
 	public Archivo guardarArchivo(MultipartFile file) throws Exception {
 	     // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        Categoria categoria = new Categoria();
+        Usuario usuario = new Usuario();
        
         try {
             // Check if the file's name contains invalid characters
@@ -41,7 +45,7 @@ public class ArchivoServiceImpl implements IArchivoService {
                 throw new Exception("Sorry! Filename contains invalid path sequence " + fileName);
             }
 
-            Archivo dbFile = new Archivo(fileName,file.getContentType(), file.getBytes(),null,null);
+            Archivo dbFile = new Archivo(fileName,file.getContentType(), file.getBytes(),categoria,usuario);
 
             return iArchivoDAO.save(dbFile);
         } catch (IOException ex) {
