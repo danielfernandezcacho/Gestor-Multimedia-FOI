@@ -13,6 +13,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,12 +44,10 @@ import FOIGestorMultimedia.service.ArchivoServiceImpl;
  *
  */
 
-@EnableJpaRepositories
+
 @RestController
 @RequestMapping("/archivos")
 public class ArchivoController {
-	
-	String FILE_DIRECTORY;
 
 	@Autowired
 	ArchivoServiceImpl archivoServiceImpl;
@@ -59,23 +59,13 @@ public class ArchivoController {
 		return archivoServiceImpl.listarArchivo();
 	}
 
-	
 	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
-	@Value("${file.upload-dir}")
 	@PostMapping("/subir")
-	public Archivo salvarArchivo(@RequestParam("File") MultipartFile data) throws IOException {
-
-		File file = new File(FILE_DIRECTORY + data.getOriginalFilename());
-		file.createNewFile();
-		FileOutputStream fos = new FileOutputStream(file);
-		fos.write(data.getBytes());
-		Archivo archivo = new Archivo();
-		archivo.setNombre(data.getOriginalFilename());
-		
-		fos.close();
-		
-		return archivoServiceImpl.guardarArchivo(archivo);	}
+	public Archivo salvarArchivo(@RequestParam("file") MultipartFile files) throws Exception {
 	
+		return archivoServiceImpl.guardarArchivo(files);
+	}
+
 	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	@GetMapping("/{id}")
 	public Archivo archivoXID(@PathVariable(name = "id") int id) {
@@ -87,7 +77,7 @@ public class ArchivoController {
 		return archivo_xid;
 	}
 
-	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
+/*	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	@PutMapping("/{id}")
 	public Archivo actualizarArchivo(@PathVariable(name = "id") int id, @RequestBody Archivo archivo) {
 
@@ -102,13 +92,12 @@ public class ArchivoController {
 		archivo_seleccionado.setDetalle(archivo.getDetalle());
 		archivo_seleccionado.setDescripcion(archivo.getDescripcion());
 		archivo_seleccionado.setCategoria(archivo.getCategoria());
-		//archivo_actualizado.setData(archivo.getData());
-		
+		// archivo_actualizado.setData(archivo.getData());
 
 		archivo_actualizado = archivoServiceImpl.actualizarArchivo(archivo_seleccionado);
 
 		return archivo_actualizado;
-	}
+	}*/
 
 	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	@DeleteMapping("/{id}")
