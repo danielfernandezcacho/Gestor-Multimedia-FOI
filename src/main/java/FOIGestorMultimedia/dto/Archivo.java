@@ -58,14 +58,14 @@ public class Archivo {
 	 * @param categoria
 	 * @param usuario
 	 */
-	public Archivo(String nombre, String tipo,byte[] data/*,
-			 Categoria categoria, Usuario usuario*/) {
+	public Archivo(String nombre, String tipo,byte[] data,
+			 Categoria categoria, Usuario usuario) {
 
 		this.nombre = nombre;
 		this.tipo = tipo;
 		this.data = data;
-		/*this.categoria = categoria;
-		this.usuario = usuario;*/
+		this.categoria = categoria;
+		this.usuario = usuario;
 	}
 
 	/**
