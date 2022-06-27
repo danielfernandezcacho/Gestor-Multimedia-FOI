@@ -12,7 +12,7 @@ public interface IArchivoService {
 
 	public List<Archivo> listarArchivo(); //Listar todo
 	
-	public Archivo guardarArchivo(MultipartFile file) throws Exception;	//Crear un Archivo
+	public Archivo guardarArchivo(MultipartFile file,int idC,int idU) throws Exception;	//Crear un Archivo
 	
 	public Archivo archivoXID(int id); //Leer todos los datos de Archivo
 	

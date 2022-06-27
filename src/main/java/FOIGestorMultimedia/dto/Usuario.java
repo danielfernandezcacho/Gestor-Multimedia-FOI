@@ -41,8 +41,8 @@ public class Usuario implements UserDetails{
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<Categoria> categoria;
 	
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-	private List<Archivo> archivo;
+//	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+//	private List<Archivo> archivo;
 	
 	@Enumerated(EnumType.STRING)
 	public Rol rol;
@@ -122,17 +122,17 @@ public class Usuario implements UserDetails{
 	/**
 	 * @return the archivo
 	 */
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Archivo")
-	public List<Archivo> getArchivo() {
-		return archivo;
-	}
-	/**
-	 * @param archivo the archivo to set
-	 */
-	public void setArchivo(List<Archivo> archivo) {
-		this.archivo = archivo;
-	}
+//	@JsonIgnore
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Archivo")
+//	public List<Archivo> getArchivo() {
+//		return archivo;
+//	}
+//	/**
+//	 * @param archivo the archivo to set
+//	 */
+//	public void setArchivo(List<Archivo> archivo) {
+//		this.archivo = archivo;
+//	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
