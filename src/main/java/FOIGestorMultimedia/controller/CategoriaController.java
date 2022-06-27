@@ -27,20 +27,20 @@ public class CategoriaController {
 	CategoriaServiceImpl categoriaServiceImpl;
 
 	//and... para que el mismo usuario vea sus categorias
-	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
+	//@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	@GetMapping("/")
 	public List<Categoria> listarCategoria() {
 		return categoriaServiceImpl.listarCategoria();
 	}
 
-	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
+	//@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	@PostMapping("/")
 	public Categoria salvarCategoria(@RequestBody Categoria categoria) {
 
 		return categoriaServiceImpl.guardarCategoria(categoria);
 	}
 
-	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
+	//@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	@GetMapping("/{id}")
 	public Categoria CategoriaXID(@PathVariable(name = "id") int id) {
 
@@ -51,7 +51,7 @@ public class CategoriaController {
 		return categoria_xid ;
 	}
 
-	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
+	//	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	@PutMapping("/{id}")
 	public Categoria actualizarCategoria(@PathVariable(name = "id") int id, @RequestBody Categoria categoria) {
 
@@ -69,7 +69,7 @@ public class CategoriaController {
 		return categoria_actualizado;
 	}
 
-	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
+	//	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	@DeleteMapping("/{id}")
 	public void eliminarCategoria(@PathVariable(name = "id") int id) {
 		categoriaServiceImpl.eliminarCategoria(id);

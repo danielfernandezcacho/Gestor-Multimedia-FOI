@@ -63,7 +63,7 @@ public class UsuarioController {
 	      .body("Response with header using ResponseEntity");
 	}
 	
-	@PreAuthorize("hasAnyAuthority('ADMIN')")
+	//@PreAuthorize("hasAnyAuthority('ADMIN')")
 	@PostMapping("/")
 	public Usuario saveUsuario(@RequestBody Usuario usuario) {
 		usuario.setContrasenya(bCryptPasswordEncoder.encode(usuario.getContrasenya()));
@@ -71,13 +71,13 @@ public class UsuarioController {
 		return usuario;
 	}
 
-	@PreAuthorize("hasAnyAuthority('ADMIN')")
+	//@PreAuthorize("hasAnyAuthority('ADMIN')")
 	@GetMapping("/")
 	public List<Usuario> listarUsuario() {
 		return usuarioServiceImpl.listarUsuario();
 	}
 
-	@PreAuthorize("hasAnyAuthority('ADMIN')")
+	//@PreAuthorize("hasAnyAuthority('ADMIN')")
 	@GetMapping("/{id}")
 	public Usuario usuariosXID(@PathVariable(name = "id") int id) {
 
@@ -88,7 +88,7 @@ public class UsuarioController {
 		return usuario_xid;
 	}
     
-	@PreAuthorize("hasAnyAuthority('ADMIN')")
+	//@PreAuthorize("hasAnyAuthority('ADMIN')")
 	@PutMapping("/{id}")
 	public Usuario actualizarUsuarios(@PathVariable(name = "id") int id, @RequestBody Usuario usuario) {
 
@@ -106,7 +106,7 @@ public class UsuarioController {
 		return usuario_actualizado;
 	}
 
-	@PreAuthorize("hasAnyAuthority('ADMIN')")
+	//	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	@DeleteMapping("/{id}")
 	public void eliminarUsuarios(@PathVariable(name = "id") int id) {
 		usuarioServiceImpl.eliminarUsuario(id);

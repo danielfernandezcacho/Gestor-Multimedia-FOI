@@ -33,11 +33,9 @@ public class ArchivoServiceImpl implements IArchivoService {
 	}
 
 	@Override
-	public Archivo guardarArchivo(MultipartFile file) throws Exception {
+	public Archivo guardarArchivo(MultipartFile file, int categoria, int usuario) throws Exception {
 	     // Normalize file name
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        Categoria categoria = new Categoria();
-        Usuario usuario = new Usuario();
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());         
        
         try {
             // Check if the file's name contains invalid characters

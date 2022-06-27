@@ -9,15 +9,9 @@
  */
 package FOIGestorMultimedia.controller;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import org.apache.catalina.connector.Response;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -48,34 +42,27 @@ import FOIGestorMultimedia.service.ArchivoServiceImpl;
 
 
 @RestController
-@RequestMapping("/archivos")
+@RequestMapping("/archivo")
 public class ArchivoController {
 
 	@Autowired
 	ArchivoServiceImpl archivoServiceImpl;
 
-	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
+	//@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	@GetMapping("/")
 	public List<Archivo> listarArchivo() {
 
 		return archivoServiceImpl.listarArchivo();
 	}
 
-	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
+//	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	@PostMapping("/subir")
-	public Response salvarArchivo(@RequestParam("file") MultipartFile files) throws Exception {
+	public Archivo salvarArchivo(@RequestParam("file") MultipartFile files,@RequestParam("categoria") int idCategoria,@RequestParam("usuario") int idUsuario) throws Exception {
 	
-		Archivo archivo = archivoServiceImpl.guardarArchivo(files);
-
-	        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-	            .path("/downloadFile/")
-	            .path(archivo.getNombre())
-	            .toUriString();
-
-	        return new Response();
+	        return archivoServiceImpl.guardarArchivo(files,idCategoria,idUsuario);
 	}
 
-	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
+	//@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	@GetMapping("/{id}")
 	public Archivo archivoXID(@PathVariable(name = "id") int id) {
 
@@ -108,7 +95,7 @@ public class ArchivoController {
 		return archivo_actualizado;
 	}*/
 
-	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
+	//@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	@DeleteMapping("/{id}")
 	public void eliminarArchivo(@PathVariable(name = "id") int id) {
 		archivoServiceImpl.eliminarArchivo(id);

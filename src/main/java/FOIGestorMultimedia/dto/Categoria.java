@@ -36,8 +36,8 @@ public class Categoria {
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 	
-	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
-	private List<Archivo> archivo;
+//	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
+//	private List<Archivo> archivo;
 
 	/**
 	 * 
@@ -123,16 +123,16 @@ public class Categoria {
 	/**
 	 * @return the archivo
 	 */
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Archivo")
-	public List<Archivo> getArchivo() {
-		return archivo;
-	}
-	/**
-	 * @param archivo the archivo to set
-	 */
-	public void setArchivo(List<Archivo> archivo) {
-		this.archivo = archivo;
-	}
+//	@JsonIgnore
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Archivo")
+//	public List<Archivo> getArchivo() {
+//		return archivo;
+//	}
+//	/**
+//	 * @param archivo the archivo to set
+//	 */
+//	public void setArchivo(List<Archivo> archivo) {
+//		this.archivo = archivo;
+//	}
 		
 }
