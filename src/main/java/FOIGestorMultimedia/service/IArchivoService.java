@@ -20,5 +20,6 @@ public interface IArchivoService {
 	
 	public void eliminarArchivo(int id);// Eliminar Archivo
 
+	public Archivo archivoXIDCategoria(int id);
 
 }
