@@ -102,13 +102,12 @@ public class ArchivoController {
 		archivoServiceImpl.eliminarArchivo(id);
 	}
 	
-	@GetMapping("/categoria/{id_categoria}")
-	public Archivo archivoXIDCategoria(@PathVariable(name = "id_categoria") int id) {
+	/*@GetMapping("/categoria/{id_categoria}")
+	public Archivo archivoXIDCategoria(@PathVariable(name = "id_categoria") int id_categoria) {
 
-		Archivo archivo_xIDCategoria = new Archivo();
+		Archivo archivo_xIDCategoria = archivoServiceImpl.archivoXIDCategoria(id_categoria);
 
-		archivo_xIDCategoria = archivoServiceImpl.archivoXIDCategoria(id);
 
 		return archivo_xIDCategoria;
-	}
+	}*/
 }

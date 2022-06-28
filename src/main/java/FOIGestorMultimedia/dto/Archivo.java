@@ -29,7 +29,7 @@ public class Archivo {
 	@NonNull
 	private int id_usuario;
 
-	@ManyToOne
+	//@ManyToOne
 //	@JoinColumn(name = "id_categoria")
 //	private Categoria categoria;
 //	
@@ -37,13 +37,7 @@ public class Archivo {
 //	@JoinColumn(name = "id_usuario")
 //	private Usuario usuario;
 
-	public byte[] getData() {
-		return data;
-	}
 
-	public void setData(byte[] data) {
-		this.data = data;
-	}
 
 	/**
 	 * 
@@ -71,6 +65,14 @@ public class Archivo {
 		this.id_categoria = idCat;
 		this.id_usuario = idUser;
 	}
+	
+	public byte[] getData() {
+		return data;
+	}
+
+	public void setData(byte[] data) {
+		this.data = data;
+	}
 
 	/**
 	 * @return the id
@@ -84,6 +86,22 @@ public class Archivo {
 	 */
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getId_categoria() {
+		return id_categoria;
+	}
+
+	public void setId_categoria(int id_categoria) {
+		this.id_categoria = id_categoria;
+	}
+
+	public int getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(int id_usuario) {
+		this.id_usuario = id_usuario;
 	}
 
 	/**
