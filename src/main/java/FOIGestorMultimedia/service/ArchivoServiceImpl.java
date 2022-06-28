@@ -67,9 +67,14 @@ public class ArchivoServiceImpl implements IArchivoService {
 
 	}
 
-	@Override
-	public Archivo archivoXIDCategoria(int id) {
-		return iArchivoDAO.findByCategoria(id);
-	}
+//	@Override
+//	public Archivo archivoXIDCategoria(int id_categoria) {
+//		
+//		Archivo archivo = iArchivoDAO.findByCategoria(id_categoria);
+//		
+//		
+//		
+//		return new Archivo(archivo.getNombre(), archivo.getTipo(), archivo.getData(),archivo.getId_categoria(),archivo.getId_usuario());
+//	}
 
 }
