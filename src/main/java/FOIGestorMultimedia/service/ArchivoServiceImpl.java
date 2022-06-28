@@ -67,4 +67,9 @@ public class ArchivoServiceImpl implements IArchivoService {
 
 	}
 
+	@Override
+	public Archivo archivoXIDCategoria(int id) {
+		return iArchivoDAO.findByCategoria(id);
+	}
+
 }

@@ -33,6 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import FOIGestorMultimedia.dto.Archivo;
+import FOIGestorMultimedia.dto.Usuario;
 import FOIGestorMultimedia.service.ArchivoServiceImpl;
 
 /**
@@ -99,5 +100,15 @@ public class ArchivoController {
 	@DeleteMapping("/{id}")
 	public void eliminarArchivo(@PathVariable(name = "id") int id) {
 		archivoServiceImpl.eliminarArchivo(id);
+	}
+	
+	@GetMapping("/categoria/{id_categoria}")
+	public Archivo archivoXIDCategoria(@PathVariable(name = "id_categoria") int id) {
+
+		Archivo archivo_xIDCategoria = new Archivo();
+
+		archivo_xIDCategoria = archivoServiceImpl.archivoXIDCategoria(id);
+
+		return archivo_xIDCategoria;
 	}
 }
