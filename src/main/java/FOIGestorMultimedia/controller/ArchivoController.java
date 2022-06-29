@@ -11,8 +11,15 @@ package FOIGestorMultimedia.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,37 +27,43 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import FOIGestorMultimedia.dto.Archivo;
+import FOIGestorMultimedia.dto.Usuario;
 import FOIGestorMultimedia.service.ArchivoServiceImpl;
 
 /**
  * ArchivoController.java
  *
  */
+
+
 @RestController
-@RequestMapping("/archivos")
+@RequestMapping("/archivo")
 public class ArchivoController {
 
 	@Autowired
 	ArchivoServiceImpl archivoServiceImpl;
 
-	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
+	//@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	@GetMapping("/")
 	public List<Archivo> listarArchivo() {
 
 		return archivoServiceImpl.listarArchivo();
 	}
 
-	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
-	@PostMapping("/")
-	public Archivo salvarArchivo(@RequestBody Archivo archivo) {
-
-		return archivoServiceImpl.guardarArchivo(archivo);
-	}
+//	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
+	@PostMapping("/subir")
+	public Archivo salvarArchivo(@RequestParam("file") MultipartFile files,@RequestParam("categoria") int idCategoria,@RequestParam("usuario") int idUsuario) throws Exception {
 	
-	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
+	        return archivoServiceImpl.guardarArchivo(files,idCategoria,idUsuario);
+	}
+
+	//@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	@GetMapping("/{id}")
 	public Archivo archivoXID(@PathVariable(name = "id") int id) {
 
@@ -61,7 +74,7 @@ public class ArchivoController {
 		return archivo_xid;
 	}
 
-	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
+/*	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	@PutMapping("/{id}")
 	public Archivo actualizarArchivo(@PathVariable(name = "id") int id, @RequestBody Archivo archivo) {
 
@@ -76,16 +89,25 @@ public class ArchivoController {
 		archivo_seleccionado.setDetalle(archivo.getDetalle());
 		archivo_seleccionado.setDescripcion(archivo.getDescripcion());
 		archivo_seleccionado.setCategoria(archivo.getCategoria());
-		
+		// archivo_actualizado.setData(archivo.getData());
 
 		archivo_actualizado = archivoServiceImpl.actualizarArchivo(archivo_seleccionado);
 
 		return archivo_actualizado;
-	}
+	}*/
 
-	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
+	//@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	@DeleteMapping("/{id}")
 	public void eliminarArchivo(@PathVariable(name = "id") int id) {
 		archivoServiceImpl.eliminarArchivo(id);
 	}
+	
+	/*@GetMapping("/categoria/{id_categoria}")
+	public Archivo archivoXIDCategoria(@PathVariable(name = "id_categoria") int id_categoria) {
+
+		Archivo archivo_xIDCategoria = archivoServiceImpl.archivoXIDCategoria(id_categoria);
+
+
+		return archivo_xIDCategoria;
+	}*/
 }

@@ -2,6 +2,7 @@ package FOIGestorMultimedia.security;
 
 import static FOIGestorMultimedia.security.Constants.LOGIN_URL;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -43,14 +44,19 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		 * 5. Se indica que el resto de URLs esten securizadas
 		 */
 		
+//		httpSecurity
+//			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+//			.cors().and()
+//			.csrf().disable()
+//			.authorizeRequests().antMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
+//			.anyRequest().authenticated().and()
+//				.addFilter(new JWTAuthenticationFilter(authenticationManager()))
+//				.addFilter(new JWTAuthorizationFilter(authenticationManager()));
+		
 		httpSecurity
-			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-			.cors().and()
-			.csrf().disable()
-			.authorizeRequests().antMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
-			.anyRequest().authenticated().and()
-				.addFilter(new JWTAuthenticationFilter(authenticationManager()))
-				.addFilter(new JWTAuthorizationFilter(authenticationManager()));
+		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+		.cors().and()
+		.csrf().disable();
 	}
 
 	@Override
